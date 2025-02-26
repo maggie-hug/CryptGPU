@@ -158,6 +158,7 @@ class FromOnnx:
         for node in self.onnx_model.graph.node:
             attributes = FromOnnx.get_attributes(node)
             parameters, node_input_names = self.get_parameters(node, input_names)
+           """根据操作类型进行转换"""
             crypten_class = self._get_operator_class(node.op_type, attributes)
 
             if TF_AND_TF2ONNX:
@@ -270,6 +271,7 @@ class FromOnnx:
         raise ValueError("Unknown attribute type for attribute %s." % attr.name)
 
     @classmethod
+        """在modele块中获取对应操作的模块"""
     def _get_operator_class(cls, node_op_type, attributes):
         """Returns CrypTen class of operator"""
         # get operator type:
